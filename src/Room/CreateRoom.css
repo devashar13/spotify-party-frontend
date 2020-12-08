@@ -1,0 +1,18 @@
+.createRoom{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+.createRoom__header{
+    align-items: center;
+}
+
+.createRoom__formHelper{
+    color: grey;
+    font-size: 15px;
+}
+.createRoom__novotes{
+    margin-top: 15px;
+}
