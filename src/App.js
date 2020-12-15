@@ -3,6 +3,7 @@ import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import './app.css';
 import Home from './Home/Home';
 import CreateRoom from './Room/CreateRoom';
+import Room from './Room/Room';
 import RoomJoin from './Room/RoomJoin';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
               <Route exact path="/"  component={Home}/>
               <Route exact path="/join" component={RoomJoin}/>
               <Route exact path="/create" component={CreateRoom}/>
+              <Route exact path = "/room/:roomCode" component={Room}/>
       
           </Switch>    
       </div>

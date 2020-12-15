@@ -6,9 +6,25 @@ import TextField from "@material-ui/core/TextField";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import './CreateRoom.css';
 import { FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 function CreateRoom() {
+    let history=useHistory();
     const[votesToSkip,setVotesToSkip]=useState(2);
     const[guestCanPause,setGuestCanPause]=useState(true);
+    const handleRoomButtonPressed=()=>{
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            guest_can_pause: guestCanPause,
+            votes_to_skip: votesToSkip,
+          }),
+          
+        };
+        fetch("http://localhost:8000/api/create-room", requestOptions)
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+      }
 
    
     return (
@@ -21,9 +37,9 @@ function CreateRoom() {
                    <div align="center">Guest Control of playback state</div>
                </FormHelperText>
                <RadioGroup row defaultValue="true" onChange={(e)=>{
-                    setGuestCanPause({
-                        guestCanPause:e.target.value==='true'?true:false,
-                    })
+                    setGuestCanPause(
+                        e.target.value==='true'?true:false,
+                    )
                }}>
                    <FormControlLabel
                     value="true"
@@ -43,9 +59,9 @@ function CreateRoom() {
                <FormControl>
                    <TextField
                    onChange={(e)=>{
-                    setVotesToSkip({
-                        votesToSkip:e.target.value,
-                    })
+                    setVotesToSkip(
+                        e.target.value,
+                    )
                    }}
                    required={true}
                    type="number"
@@ -67,7 +83,7 @@ function CreateRoom() {
            </div>
            <div className="createRoom__button">
            <Button
-            onClick={console.log(votesToSkip,guestCanPause)}
+            onClick={handleRoomButtonPressed}
             variant="contained"
             color="primary">Create A room
            </Button>
